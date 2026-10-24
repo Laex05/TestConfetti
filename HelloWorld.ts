@@ -13,4 +13,7 @@ function start() {
   console.log('Hello World!!!');
 
   PlayParticles.atPos(Vector3.up, MyParticles.getConfettiParticlesProperties(Color.randomHue()));
+  PlayParticles.atPos(Vector3.up, MyParticles.getConfettiParticlesProperties(Color.randomHue()));
+  PlayParticles.atPos(Vector3.up, MyParticles.getConfettiParticlesProperties(Color.randomHue()));
+  PlayParticles.atPos(Vector3.up, MyParticles.getConfettiParticlesProperties(Color.randomHue()));
 }
