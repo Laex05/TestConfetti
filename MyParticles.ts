@@ -17,8 +17,6 @@ function getConfettiParticlesProperties(color: Color): Partial<ParticlesProperti
   confettiPlane.visible.set(false);
   confettiPlane.mesh.color.set(color, 1);
 
-  confettiPlane.destroy();
-
   return {
     meshNodeID: confettiPlane.mesh.nodeID ?? -1,
 
