@@ -23,6 +23,7 @@ function getConfettiParticlesProperties(color: Color): Partial<ParticlesProperti
     isEmitting: true,
     isOneShot: false,
     randomness: 0.5,
+    explosiveness: 0.9,
 
     amount: 24,
     lifetimeInSeconds: 3,
