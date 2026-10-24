@@ -1,6 +1,7 @@
+import { MyParticles } from "./MyParticles";
+import { Color } from "./Yuu API/Basic Types/Color";
 import { Vector3 } from "./Yuu API/Basic Types/Vector3";
 import { inWorldConsole } from "./Yuu API/Console";
-import { DefaultParticles } from "./Yuu API/Particles/DefaultParticles";
 import { PlayParticles } from "./Yuu API/Particles/PlayParticles";
 import { registerStart } from "./Yuu API/RegisterStart";
 
@@ -11,5 +12,5 @@ function start() {
 
   console.log('Hello World!!!');
 
-  PlayParticles.atPos(Vector3.up, DefaultParticles.getHeartParticlesProperties());
+  PlayParticles.atPos(Vector3.up, MyParticles.getConfettiParticlesProperties(Color.randomHue()));
 }
