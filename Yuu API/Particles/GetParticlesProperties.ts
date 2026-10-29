@@ -25,6 +25,10 @@ export const GetParticlesProperties = {
       min: minScale,
       max: maxScale,
     },
+    initialRotation: {
+      min: initialRotationMin,
+      max: initialRotationMax,
+    },
     initialVelocity: {
       min: minInitialVelocity,
       max: maxInitialVelocity,
@@ -46,7 +50,13 @@ export const GetParticlesProperties = {
       noiseSpeed: turbulenceNoiseSpeed,
       noiseSpeedRandom: turbulenceNoiseSpeedRandom,
     },
-    transformAlign,
+    transformAlign: {
+      type: transformAlign,
+      angle: {
+        min: transformAlignAngleMin,
+        max: transformAlignAngleMax,
+      },
+    },
 }
 
 
@@ -196,6 +206,26 @@ function maxScale(particlesEntity: Entity): number | undefined {
   }
 }
 
+function initialRotationMin(particlesEntity: Entity): Vector3 | undefined {
+  if (particlesEntity.particles.nodeID) {
+    const payload = Godot.node.particles.initialRotation.min.get(particlesEntity.particles.nodeID);
+    return payload ? new Vector3(payload.x, payload.y, payload.z) : undefined;
+  }
+  else {
+    return undefined;
+  }
+}
+
+function initialRotationMax(particlesEntity: Entity): Vector3 | undefined {
+  if (particlesEntity.particles.nodeID) {
+    const payload = Godot.node.particles.initialRotation.max.get(particlesEntity.particles.nodeID);
+    return payload ? new Vector3(payload.x, payload.y, payload.z) : undefined;
+  }
+  else {
+    return undefined;
+  }
+}
+
 function minInitialVelocity(particlesEntity: Entity): number | undefined {
   if (particlesEntity.particles.nodeID) {
     return Godot.node.particles.initialVelocity.min.get(particlesEntity.particles.nodeID);
@@ -326,3 +356,22 @@ function transformAlign(particlesEntity: Entity): ParticlesTransformAlignment | 
     return undefined;
   }
 }
+
+function transformAlignAngleMin(particlesEntity: Entity): number | undefined {
+  if (particlesEntity.particles.nodeID) {
+    return Godot.node.particles.transformAlign.angle.min.get(particlesEntity.particles.nodeID);
+  }
+  else {
+    return undefined;
+  }
+}
+
+function transformAlignAngleMax(particlesEntity: Entity): number | undefined {
+  if (particlesEntity.particles.nodeID) {
+    return Godot.node.particles.transformAlign.angle.max.get(particlesEntity.particles.nodeID);
+  }
+  else {
+    return undefined;
+  }
+}
+

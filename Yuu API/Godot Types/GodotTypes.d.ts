@@ -236,7 +236,7 @@ declare namespace Godot {
          * @returns true if started, false if already running
          */
         start: () => boolean;
-  
+
         isCompleted: () => boolean;
         filesRemaining: () => number;
       }
@@ -1078,6 +1078,25 @@ declare namespace Godot {
       },
 
       /**
+       * Adjusts the particles initial rotation when emitted.
+       * Default set to `false` and `(0, 0, 0)` for both min and max.
+       */
+      initialRotation: {
+        isEnabled: {
+          set: (id: number, isEnabled: boolean) => boolean,
+          get: (id: number) => number | undefined,
+        }
+        min: {
+          set: (id: number, x: number, y: number, z: number) => boolean,
+          get: (id: number) => { x: number, y: number, z: number } | undefined,
+        },
+        max: {
+          set: (id: number, x: number, y: number, z: number) => boolean,
+          get: (id: number) => { x: number, y: number, z: number } | undefined,
+        },
+      },
+
+      /**
        * Adjusts the min and max initial velocity of the particles. Set to min: 0.25 and max: 1.0 by default.
        */
       initialVelocity: {
@@ -1199,6 +1218,22 @@ declare namespace Godot {
       transformAlign: {
         set: (id: number, alignment: ParticlesTransformAlignment) => boolean,
         get: (id: number) => ParticlesTransformAlignment | undefined,
+
+        /**
+         * Adjusts the min and max angle in degrees of the initial rotation for transform aligned particles.
+         * Min and max are set to 0 by default.
+         * Note: matching min and max values ensure all particles have the same rotation angle.
+         */
+        angle: {
+          min: {
+            set: (id: number, min: number) => boolean,
+            get: (id: number) => number | undefined,
+          },
+          max: {
+            set: (id: number, max: number) => boolean,
+            get: (id: number) => number | undefined,
+          }
+        },
       },
     };
 

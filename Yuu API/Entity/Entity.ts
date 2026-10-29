@@ -1198,6 +1198,16 @@ export class Entity {
             Godot.node.particles.scale.max.set(this.particles.nodeID, properties.scaleMax);
           }
 
+          if (properties.initialRotationMin !== undefined || properties.initialRotationMax !== undefined) {
+            Godot.node.particles.initialRotation.isEnabled.set(this.particles.nodeID, true);
+          }
+          if (properties.initialRotationMin) {
+            Godot.node.particles.initialRotation.min.set(this.particles.nodeID, properties.initialRotationMin.x, properties.initialRotationMin.y, properties.initialRotationMin.z);
+          }
+          if (properties.initialRotationMax) {
+            Godot.node.particles.initialRotation.max.set(this.particles.nodeID, properties.initialRotationMax.x, properties.initialRotationMax.y, properties.initialRotationMax.z);
+          }
+
           if (properties.initialVelocityMin) {
             Godot.node.particles.initialVelocity.min.set(this.particles.nodeID, properties.initialVelocityMin);
           }
@@ -1206,18 +1216,14 @@ export class Entity {
             Godot.node.particles.initialVelocity.max.set(this.particles.nodeID, properties.initialVelocityMax);
           }
 
-          if (properties.rotationVelocityMin === undefined && properties.rotationVelocityMax === undefined) {
-            Godot.node.particles.rotationVelocity.isEnabled.set(this.particles.nodeID, false);
-          }
-          else {
+          if (properties.rotationVelocityMin !== undefined || properties.rotationVelocityMax !== undefined) {
             Godot.node.particles.rotationVelocity.isEnabled.set(this.particles.nodeID, true);
-
-            if (properties.rotationVelocityMin) {
-              Godot.node.particles.rotationVelocity.min.set(this.particles.nodeID, properties.rotationVelocityMin.x, properties.rotationVelocityMin.y, properties.rotationVelocityMin.z);
-            }
-            if (properties.rotationVelocityMax) {
-              Godot.node.particles.rotationVelocity.max.set(this.particles.nodeID, properties.rotationVelocityMax.x, properties.rotationVelocityMax.y, properties.rotationVelocityMax.z);
-            }
+          }
+          if (properties.rotationVelocityMin) {
+            Godot.node.particles.rotationVelocity.min.set(this.particles.nodeID, properties.rotationVelocityMin.x, properties.rotationVelocityMin.y, properties.rotationVelocityMin.z);
+          }
+          if (properties.rotationVelocityMax) {
+            Godot.node.particles.rotationVelocity.max.set(this.particles.nodeID, properties.rotationVelocityMax.x, properties.rotationVelocityMax.y, properties.rotationVelocityMax.z);
           }
 
           if (properties.gravity) {
@@ -1263,7 +1269,15 @@ export class Entity {
           }
 
           if (properties.transformAlign) {
-            Godot.node.particles.transformAlign.set(this.particles.nodeID, properties.transformAlign);
+            if (properties.transformAlign.type) {
+              Godot.node.particles.transformAlign.set(this.particles.nodeID, properties.transformAlign.type);
+            }
+            if (properties.transformAlign.angleMin) {
+              Godot.node.particles.transformAlign.angle.min.set(this.particles.nodeID, properties.transformAlign.angleMin);
+            }
+            if (properties.transformAlign.angleMax) {
+              Godot.node.particles.transformAlign.angle.max.set(this.particles.nodeID, properties.transformAlign.angleMax);
+            }
           }
         }
         else {
@@ -1279,6 +1293,20 @@ export class Entity {
       else {
         return Godot.node.particles.isEmitting.get(this.particles.nodeID) ?? false;
       }
+    },
+
+    toggleProperty: {
+      initialRotation: (isEnabled: boolean) => {
+        if (this.particles.nodeID) {
+          Godot.node.particles.initialRotation.isEnabled.set(this.particles.nodeID, isEnabled);
+        }
+      },
+  
+      rotationVelocity: (isEnabled: boolean) => {
+        if (this.particles.nodeID) {
+          Godot.node.particles.rotationVelocity.isEnabled.set(this.particles.nodeID, isEnabled);
+        }
+      },
     },
 
     play: () => {

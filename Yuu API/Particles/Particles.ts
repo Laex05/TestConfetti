@@ -6,15 +6,15 @@ export type ParticlesProperties = {
   meshNodeID: number,
   emissionShape: ParticlesEmissionShape,
   emissionShapeProperties: Partial<{
-    sphereRadius: number | undefined,
-    boxExtents: Vector3 | undefined,
-    ring: {
-      axis: Vector3 | undefined,
-      height: number | undefined,
-      radius: number | undefined,
-      innerRadius: number | undefined,
-      coneAngle: number | undefined,
-    },
+    sphereRadius: number,
+    boxExtents: Vector3,
+    ring: Partial<{
+      axis: Vector3,
+      height: number,
+      radius: number,
+      innerRadius: number,
+      coneAngle: number,
+    }>,
   }>,
 
   isEmitting: boolean,
@@ -27,23 +27,29 @@ export type ParticlesProperties = {
   speedScale: number,
   scaleMin: number,
   scaleMax: number,
+  initialRotationMin: Vector3,
+  initialRotationMax: Vector3,
 
   initialVelocityMin: number,
   initialVelocityMax: number,
-  rotationVelocityMin: Vector3 | undefined,
-  rotationVelocityMax: Vector3 | undefined,
+  rotationVelocityMin: Vector3,
+  rotationVelocityMax: Vector3,
 
   gravity: Vector3,
   direction: Vector3,
   spread: number,
   tangentialAccelMin: number,
   tangentialAccelMax: number,
-  turbulence: {
-    noiseStrength: number | undefined,
-    noiseScale: number | undefined,
-    noiseSpeed: Vector3 | undefined,
-    noiseSpeedRandom: number | undefined,
-  }
+  turbulence: Partial<{
+    noiseStrength: number,
+    noiseScale: number,
+    noiseSpeed: Vector3,
+    noiseSpeedRandom: number,
+  }>,
 
-  transformAlign: ParticlesTransformAlignment,
+  transformAlign: Partial<{
+    type: ParticlesTransformAlignment,
+    angleMin: number,
+    angleMax: number,
+  }>,
 }
